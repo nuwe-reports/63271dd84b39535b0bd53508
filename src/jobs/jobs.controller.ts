@@ -45,10 +45,10 @@ export class JobsController {
   update(
     @Body() updateJobDto: CreateJobDto,
     @Res() response,
-    @Param('id') jobId,
+    @Param('id') idJob,
   ) {
     this.jobsService
-      .updateJob(jobId, updateJobDto)
+      .updateJob(idJob, updateJobDto)
       .then((job) => {
         response.status(HttpStatus.OK).json(job);
       })

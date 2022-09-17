@@ -26,7 +26,9 @@ export class JobsService {
   }
 
   async updateJob(idJob: number, actualizeJob: CreateJobDto): Promise<Job> {
-    const jobUpdate = await this.jobRepository.findOne(idJob);
+    const jobUpdate = await this.jobRepository.findOne({
+      where: { id: idJob },
+    });
     jobUpdate.title = actualizeJob.title;
     jobUpdate.description = actualizeJob.description;
     jobUpdate.company = actualizeJob.company;
