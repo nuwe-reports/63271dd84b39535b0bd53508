@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JobsController } from './jobs/jobs.controller';
+import { Job } from './jobs/entities/job.entity';
+import { JobsService } from './jobs/jobs.service';
 
 @Module({
   imports: [
@@ -13,11 +15,12 @@ import { JobsController } from './jobs/jobs.controller';
       username: 'nest',
       password: 'app',
       database: 'jobs_db',
-      entities: [],
+      entities: [Job],
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([Job]),
   ],
   controllers: [AppController, JobsController],
-  providers: [AppService],
+  providers: [AppService, JobsService],
 })
 export class AppModule {}
