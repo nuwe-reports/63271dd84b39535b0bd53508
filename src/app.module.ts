@@ -15,7 +15,7 @@ import { MailController } from './mail/mail.controller';
         host: 'smtp.sendgrid.net',
         auth: {
           user: 'apikey',
-          pass: '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',
+          pass: process.env.SECRET_API,
         },
       },
     }),
