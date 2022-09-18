@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Job } from './entities/job.entity';
 import { CreateJobDto } from './dto/create-job-dto';
+import { Request } from 'express';
 
 @Injectable()
 export class JobsService {
@@ -11,8 +12,8 @@ export class JobsService {
     private jobRepository: Repository<Job>,
   ) {}
 
-  async getAll(): Promise<Job[]> {
-    return await this.jobRepository.find();
+  async getAll(request: Request): Promise<Job[]> {
+    return await this.jobRepository.find(request.query);
   }
 
   async createJob(newJob: CreateJobDto): Promise<Job> {

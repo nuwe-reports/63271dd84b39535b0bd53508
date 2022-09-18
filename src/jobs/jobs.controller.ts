@@ -8,8 +8,9 @@ import {
   Res,
   HttpStatus,
   Param,
+  Req,
 } from '@nestjs/common';
-import { response } from 'express';
+import { Request } from 'express';
 import { CreateJobDto } from './dto/create-job-dto';
 import { JobsService } from './jobs.service';
 
@@ -30,15 +31,8 @@ export class JobsController {
   }
 
   @Get()
-  getAll(@Res() response) {
-    this.jobsService
-      .getAll()
-      .then((jobsList) => {
-        response.status(HttpStatus.OK).json(jobsList);
-      })
-      .catch(() => {
-        response.status(HttpStatus.FORBIDDEN).json({ mensaje: 'error' });
-      });
+  async findAll(@Req() request: Request) {
+    return this.jobsService.getAll(request);
   }
 
   @Put(':id')
